@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ConcretePlanning">
+    <xsd:annotation>
+      <xsd:documentation>This file was first changed with respect to end time of the deliveries and then on 30/04/2012 it was changed in such a way that the start times of the orders are overlapping</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Orders">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Order" type="OrderType"/>
+                <xsd:complexType name="OrderType">
+                  <xsd:sequence>
+                    <xsd:element type="xsd:byte" name="OrderCode"/>
+                    <xsd:element name="ConstructionYard">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element type="xsd:byte" name="ConstructionYardCode"/>
+                          <xsd:element type="xsd:byte" name="WaitingMinutes"/>
+                          <xsd:element name="StationDurations">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="StationDuration" maxOccurs="unbounded" minOccurs="0">
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element type="xsd:string" name="StationCode"/>
+                                      <xsd:element type="xsd:byte" name="DrivingMinutes"/>
+                                      <xsd:element type="xsd:string" name="Direction"/>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element type="xsd:byte" name="PumpLineLengthRequired"/>
+                    <xsd:element type="xsd:dateTime" name="From"/>
+                    <xsd:element type="xsd:float" name="TotalVolumeM3"/>
+                    <xsd:element type="xsd:float" name="RequiredDischargeM3PerHour"/>
+                    <xsd:element type="xsd:string" name="PreferredStationCode"/>
+                    <xsd:element type="xsd:string" name="MaximumVolumeAllowed"/>
+                    <xsd:element type="xsd:string" name="IsPickUp"/>
+                    <xsd:element type="xsd:byte" name="Priority"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Vehicles">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Vehicle" type="VehicleType"/>
+                <xsd:complexType name="VehicleType">
+                  <xsd:sequence>
+                    <xsd:element type="xsd:string" name="VehicleCode"/>
+                    <xsd:element type="xsd:string" name="VehicleType"/>
+                    <xsd:element type="xsd:byte" name="PumpLineLength"/>
+                    <xsd:element type="xsd:byte" name="NormalVolume"/>
+                    <xsd:element type="xsd:byte" name="MaximumVolume"/>
+                    <xsd:element type="xsd:byte" name="DischargeM3PerHour"/>
+                    <xsd:element type="xsd:dateTime" name="NextAvailableStartDateTime"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Stations">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Station" maxOccurs="5" minOccurs="1" type="StationType"/>
+                <xsd:complexType name="StationType">
+                  <xsd:sequence>
+                    <xsd:element type="xsd:string" name="StationCode"/>
+                    <xsd:element type="xsd:byte" name="LoadingMinutes"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Output">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element type="xsd:dateTime" name="CalculationDateTime"/>
+              <xsd:element type="xsd:byte" name="CalculationMinutes"/>
+              <xsd:element type="xsd:byte" name="TotalResults"/>
+              <xsd:element type="xsd:string" name="Results"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
